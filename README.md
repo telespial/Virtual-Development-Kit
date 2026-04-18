@@ -74,4 +74,4 @@ The priority is to establish a strong architecture and a compelling first demons
 
 ## License
 
-See [LICENSE.md](./LICENSE.md).
+See [LICENSE.md](./LICENSE.md)
