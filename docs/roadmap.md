@@ -30,6 +30,11 @@ Current implementation:
 - support replayable scenarios
 - create a “before hardware” validation story
 
+Current implementation:
+- `src/vdk_phase3_validate.py` validates exchange adapter compatibility and advisory outputs
+- `scenarios/example_sensor_monitor_baseline.json` provides deterministic replay input
+- `docs/firmware-validation.md` documents before-hardware signoff flow
+
 ## Not Required for Phase 1
 - full ARM accuracy
 - perfect timing fidelity

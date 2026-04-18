@@ -49,3 +49,6 @@ python3 src/vdk_minimal_demo.py \
 ## Scope
 
 Phase 2 is a contract bridge, not full emulation. It gives EmbeddedX a repeatable virtual target handoff before hardware bring-up.
+
+For replayable pre-hardware verification, continue with:
+- [`firmware-validation.md`](./firmware-validation.md)

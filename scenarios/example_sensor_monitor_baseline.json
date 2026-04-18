@@ -1,0 +1,60 @@
+{
+  "name": "example_sensor_monitor_baseline",
+  "description": "Replay scenario for validating advisory EIL behavior before hardware bring-up.",
+  "steps": [
+    {
+      "temp_c": 42.0,
+      "vibration_g": 0.35,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    },
+    {
+      "temp_c": 46.5,
+      "vibration_g": 0.90,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    },
+    {
+      "temp_c": 66.2,
+      "vibration_g": 0.95,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "temperature_high",
+        "anomaly_score_min": 0.01
+      }
+    },
+    {
+      "temp_c": 61.0,
+      "vibration_g": 1.35,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "vibration_high",
+        "anomaly_score_min": 0.01
+      }
+    },
+    {
+      "temp_c": 69.1,
+      "vibration_g": 1.46,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "temperature_and_vibration_high",
+        "anomaly_score_min": 0.01
+      }
+    },
+    {
+      "temp_c": 45.1,
+      "vibration_g": 0.72,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    }
+  ]
+}

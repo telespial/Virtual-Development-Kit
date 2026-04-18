@@ -83,6 +83,22 @@ python3 src/vdk_minimal_demo.py \
   --exchange-contract build/embeddedx_vdk_exchange.json
 ```
 
+## Phase 3 Firmware Validation
+Run replayable before-hardware validation:
+
+```bash
+python3 src/vdk_phase3_validate.py \
+  --target-profile build/vdk_target_profile.json \
+  --exchange-contract build/embeddedx_vdk_exchange.json \
+  --scenario scenarios/example_sensor_monitor_baseline.json \
+  --report-out build/vdk_validation_report.json
+```
+
+This produces a machine-readable pass/fail report with:
+- execution-adapter compatibility checks
+- expected vs observed EIL advisory outputs
+- a pre-hardware validation summary
+
 ## Recommended Repo Layout
 
 ```text
@@ -94,9 +110,13 @@ Virtual-Development-Kit/
     roadmap.md
     first-demo.md
     embeddedx-integration.md
+    firmware-validation.md
   src/
     vdk_minimal_demo.py
     vdk_phase2_integration.py
+    vdk_phase3_validate.py
+  scenarios/
+    example_sensor_monitor_baseline.json
   crates/
     vdk-core/
     vdk-devices/
