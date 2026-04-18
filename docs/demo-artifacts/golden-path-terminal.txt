@@ -1,0 +1,306 @@
+[Quickstart] Running EmbeddedX golden path demo...
+[1/3] Running phase 3 validation suite
+Phase 2 artifacts generated:
+- target profile: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/vdk_target_profile.json
+- exchange contract: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/embeddedx_vdk_exchange.json
+- runtime stub: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/eil_runtime_stub.c
+- inject manifest: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/embeddedx_inject_manifest.json
+Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_baseline.report.json
+Summary: overall_pass=True steps_passed=5 steps_failed=0 adapter_compatible=True
+Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_noise_burst.report.json
+Summary: overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True
+Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_sensor_dropout.report.json
+Summary: overall_pass=True steps_passed=3 steps_failed=0 adapter_compatible=True
+Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_threshold_edges.report.json
+Summary: overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True
+Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+[2/3] Running short live VDK demo
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0000                                     |
+| temp_c: 41.81                                  |
+| vibration_g: 0.28                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ########................                |
+| VIBE   ###.....................                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0001                                     |
+| temp_c: 42.55                                  |
+| vibration_g: 0.61                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   #########...............                |
+| VIBE   #######.................                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0002                                     |
+| temp_c: 43.31                                  |
+| vibration_g: 0.82                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   #########...............                |
+| VIBE   #########...............                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0003                                     |
+| temp_c: 43.65                                  |
+| vibration_g: 1.07                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   #########...............                |
+| VIBE   ############............                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0004                                     |
+| temp_c: 44.39                                  |
+| vibration_g: 1.23                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   #########...............                |
+| VIBE   ##############..........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0005                                     |
+| temp_c: 45.20                                  |
+| vibration_g: 1.31                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ###############.........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0006                                     |
+| temp_c: 46.09                                  |
+| vibration_g: 1.45                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   #################.......                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0007                                     |
+| temp_c: 46.42                                  |
+| vibration_g: 1.41                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ################........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0008                                     |
+| temp_c: 46.69                                  |
+| vibration_g: 1.27                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ###############.........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0009                                     |
+| temp_c: 47.17                                  |
+| vibration_g: 1.19                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ##############..........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0010                                     |
+| temp_c: 47.98                                  |
+| vibration_g: 0.97                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   ###########.............                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0011                                     |
+| temp_c: 48.19                                  |
+| vibration_g: 0.75                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   #########...............                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0012                                     |
+| temp_c: 47.49                                  |
+| vibration_g: 0.42                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   #####...................                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0013                                     |
+| temp_c: 48.59                                  |
+| vibration_g: 0.45                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   #####...................                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0014                                     |
+| temp_c: 48.37                                  |
+| vibration_g: 0.64                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   #######.................                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0015                                     |
+| temp_c: 48.17                                  |
+| vibration_g: 0.89                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   ##########..............                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0016                                     |
+| temp_c: 47.01                                  |
+| vibration_g: 1.17                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ##############..........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0017                                     |
+| temp_c: 47.67                                  |
+| vibration_g: 1.28                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   ###############.........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0018                                     |
+| temp_c: 46.47                                  |
+| vibration_g: 1.39                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ################........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0019                                     |
+| temp_c: 46.35                                  |
+| vibration_g: 1.39                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ################........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[3/3] Golden path complete
+Validation reports: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+
+[Quickstart] Success.
+Reports:
+  /Users/richardhaberkern/Python Projects/EmbeddedX/../Virtual-Development-Kit/build/reports
+Next:
+  1) Open /Users/richardhaberkern/Python Projects/EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md
+  2) Review /Users/richardhaberkern/Python Projects/EmbeddedX/RELEASE_CHECKPOINT_v0.1-alpha.md

@@ -1,0 +1,133 @@
+{
+  "schema": "embeddedx.vdk.validation.v0",
+  "generated_at_utc": "2026-04-18T16:55:02.963034+00:00",
+  "scenario": {
+    "name": "example_sensor_monitor_baseline",
+    "description": "Baseline replay used for pre-hardware validation in EmbeddedX Phase 3.",
+    "step_count": 5
+  },
+  "runtime_thresholds": {
+    "temp_c_high": 65.0,
+    "vibration_g_high": 1.2
+  },
+  "adapter_checks": {
+    "input_count": 2,
+    "output_count": 6,
+    "required_outputs": [
+      "alert_state",
+      "anomaly_score",
+      "reason_code"
+    ],
+    "missing_outputs": [],
+    "has_runtime_mode": true,
+    "compatible": true
+  },
+  "results": [
+    {
+      "index": 0,
+      "input": {
+        "temp_c": 42.0,
+        "vibration_g": 0.35,
+        "sensor_valid": true
+      },
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      },
+      "observed": {
+        "alert_state": 0,
+        "anomaly_score": 0.0,
+        "reason_code": "none"
+      },
+      "pass": true,
+      "mismatches": []
+    },
+    {
+      "index": 1,
+      "input": {
+        "temp_c": 66.2,
+        "vibration_g": 0.95,
+        "sensor_valid": true
+      },
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "temperature_high",
+        "anomaly_score_min": 0.01
+      },
+      "observed": {
+        "alert_state": 1,
+        "anomaly_score": 0.018462,
+        "reason_code": "temperature_high"
+      },
+      "pass": true,
+      "mismatches": []
+    },
+    {
+      "index": 2,
+      "input": {
+        "temp_c": 61.0,
+        "vibration_g": 1.35,
+        "sensor_valid": true
+      },
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "vibration_high",
+        "anomaly_score_min": 0.01
+      },
+      "observed": {
+        "alert_state": 1,
+        "anomaly_score": 0.125,
+        "reason_code": "vibration_high"
+      },
+      "pass": true,
+      "mismatches": []
+    },
+    {
+      "index": 3,
+      "input": {
+        "temp_c": 69.1,
+        "vibration_g": 1.46,
+        "sensor_valid": true
+      },
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "temperature_and_vibration_high",
+        "anomaly_score_min": 0.01
+      },
+      "observed": {
+        "alert_state": 1,
+        "anomaly_score": 0.216667,
+        "reason_code": "temperature_and_vibration_high"
+      },
+      "pass": true,
+      "mismatches": []
+    },
+    {
+      "index": 4,
+      "input": {
+        "temp_c": 45.1,
+        "vibration_g": 0.72,
+        "sensor_valid": true
+      },
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      },
+      "observed": {
+        "alert_state": 0,
+        "anomaly_score": 0.0,
+        "reason_code": "none"
+      },
+      "pass": true,
+      "mismatches": []
+    }
+  ],
+  "summary": {
+    "overall_pass": true,
+    "step_pass_count": 5,
+    "step_fail_count": 0
+  },
+  "before_hardware_story": "This report confirms signal contract compatibility and expected EIL advisory behavior on replayed sensor traces before flashing physical hardware."
+}

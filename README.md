@@ -111,6 +111,10 @@ This executes:
 - all replay scenarios in `scenarios/`
 - short live demo smoke run
 
+For the end-to-end onboarding flow from EmbeddedX, see:
+- [`../EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md`](../EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md)
+- [`docs/demo-artifacts/README.md`](./docs/demo-artifacts/README.md)
+
 ## Recommended Repo Layout
 
 ```text
