@@ -48,6 +48,19 @@ Examples of acceptable phase-1 demos:
 - firmware-like event loop driving a virtual target board
 - “bring-up before hardware arrives” demo showing display and sensor responses
 
+## Phase 1 Runnable Demo
+Run the minimum no-hardware demo:
+
+```bash
+cd /home/user/python_projects/Virtual-Development-Kit
+python3 src/vdk_minimal_demo.py --steps 120 --fps 12
+```
+
+What it does:
+- virtual framebuffer output (terminal-hosted LCD)
+- fake sensor input stream (`temp_c`, `vibration_g`)
+- simple deterministic update loop with alert state
+
 ## Recommended Repo Layout
 
 ```text
@@ -59,6 +72,8 @@ Virtual-Development-Kit/
     roadmap.md
     first-demo.md
     embeddedx-integration.md
+  src/
+    vdk_minimal_demo.py
   crates/
     vdk-core/
     vdk-devices/
