@@ -20,6 +20,11 @@
 - define data exchange with EmbeddedX
 - define how CodeMaster/EIL can consume the target
 
+Current implementation:
+- `src/vdk_phase2_integration.py` builds target, exchange, and injection artifacts
+- generated `eil_runtime_stub.c` provides a fixed runtime boundary for early integration
+- `vdk_minimal_demo.py` consumes generated runtime profile and IO contract
+
 ## Phase 3 - Firmware Validation
 - support stronger execution adapter flows
 - support replayable scenarios

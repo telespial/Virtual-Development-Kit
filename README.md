@@ -61,6 +61,28 @@ What it does:
 - fake sensor input stream (`temp_c`, `vibration_g`)
 - simple deterministic update loop with alert state
 
+## Phase 2 EmbeddedX Bridge
+Generate integration artifacts from EmbeddedX project inputs:
+
+```bash
+cd /home/user/python_projects/Virtual-Development-Kit
+python3 src/vdk_phase2_integration.py \
+  --mrd /home/user/python_projects/EmbeddedX/projects/example_sensor_monitor/mrd/EXAMPLE_SENSOR_NODE.msd \
+  --mrc /home/user/python_projects/EmbeddedX/projects/example_sensor_monitor/mrc/EXAMPLE_SENSOR_NODE.mrc.json \
+  --intent /home/user/python_projects/EmbeddedX/projects/example_sensor_monitor/intent/system_intent.yaml \
+  --mdp /home/user/python_projects/EmbeddedX/projects/example_sensor_monitor/model/example_sensor_monitor.mdp.json \
+  --eil /home/user/python_projects/EmbeddedX/projects/example_sensor_monitor/eil/example_sensor_monitor.eil.json
+```
+
+Then run the demo with generated runtime thresholds and signal contract:
+
+```bash
+python3 src/vdk_minimal_demo.py \
+  --steps 120 \
+  --target-profile build/vdk_target_profile.json \
+  --exchange-contract build/embeddedx_vdk_exchange.json
+```
+
 ## Recommended Repo Layout
 
 ```text
@@ -74,6 +96,7 @@ Virtual-Development-Kit/
     embeddedx-integration.md
   src/
     vdk_minimal_demo.py
+    vdk_phase2_integration.py
   crates/
     vdk-core/
     vdk-devices/

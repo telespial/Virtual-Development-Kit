@@ -1,7 +1,9 @@
 import argparse
+import json
 import math
 import random
 import time
+from pathlib import Path
 
 
 class VirtualFramebuffer:
@@ -50,11 +52,37 @@ def fake_sensor_sample(tick: int) -> dict:
     return {"temp_c": temp_c, "vibration_g": vibration_g}
 
 
+def load_json(path: str | None) -> dict:
+    if not path:
+        return {}
+    target = Path(path)
+    return json.loads(target.read_text(encoding="utf-8"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Minimal VDK demo (framebuffer + fake sensor + loop)")
     parser.add_argument("--steps", type=int, default=120, help="number of loop steps to run")
     parser.add_argument("--fps", type=float, default=12.0, help="refresh rate")
+    parser.add_argument("--target-profile", type=str, help="optional vdk_target_profile.json")
+    parser.add_argument("--exchange-contract", type=str, help="optional embeddedx_vdk_exchange.json")
     args = parser.parse_args()
+
+    target_profile = load_json(args.target_profile)
+    exchange_contract = load_json(args.exchange_contract)
+    runtime = target_profile.get("runtime", {})
+    thresholds = runtime.get("alert_thresholds", {})
+    temp_alert_high = float(thresholds.get("temp_c_high", 65.0))
+    vibration_alert_high = float(thresholds.get("vibration_g_high", 1.2))
+
+    requested_sample_hz = runtime.get("sample_hz")
+    if requested_sample_hz:
+        try:
+            args.fps = float(requested_sample_hz)
+        except (TypeError, ValueError):
+            pass
+
+    input_count = len(exchange_contract.get("io", {}).get("inputs", []))
+    output_count = len(exchange_contract.get("io", {}).get("outputs", []))
 
     fb = VirtualFramebuffer()
     frame_time = 1.0 / max(args.fps, 1.0)
@@ -63,7 +91,7 @@ def main() -> int:
         sample = fake_sensor_sample(tick)
         temp_c = sample["temp_c"]
         vibration_g = sample["vibration_g"]
-        alert = temp_c >= 65.0 or vibration_g >= 1.2
+        alert = temp_c >= temp_alert_high or vibration_g >= vibration_alert_high
 
         fb.clear()
         fb.write_text(1, 1, "VDK MINIMAL SENSOR MONITOR")
@@ -71,6 +99,7 @@ def main() -> int:
         fb.write_text(1, 4, f"temp_c: {temp_c:05.2f}")
         fb.write_text(1, 5, f"vibration_g: {vibration_g:04.2f}")
         fb.write_text(1, 6, f"alert: {'ON ' if alert else 'off'}")
+        fb.write_text(1, 7, f"io: {input_count} in / {output_count} out")
 
         # Two virtual LCD bars for quick visual state.
         fb.write_text(1, 8, "TEMP")
