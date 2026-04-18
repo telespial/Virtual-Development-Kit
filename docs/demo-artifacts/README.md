@@ -12,3 +12,6 @@ cd /home/user/python_projects/Virtual-Development-Kit
 ./scripts/run_phase4_validation_suite.sh
 cp build/reports/*.json docs/demo-artifacts/reports/
 ```
+
+Retention policy:
+- [`../ARTIFACT_RETENTION_POLICY.md`](../ARTIFACT_RETENTION_POLICY.md)

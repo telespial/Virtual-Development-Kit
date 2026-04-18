@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -51,15 +52,45 @@ def _compute_runtime_outputs(
     }
 
 
+def _threshold_policy(runtime_thresholds: dict[str, Any]) -> dict[str, float]:
+    """Normalize threshold policy from target runtime into a stable evaluator config."""
+    return {
+        "temp_c_high": float(runtime_thresholds.get("temp_c_high", 65.0)),
+        "vibration_g_high": float(runtime_thresholds.get("vibration_g_high", 1.2)),
+    }
+
+
+def _resolve_replayed_input(
+    idx: int, step: dict[str, Any], steps: list[dict[str, Any]], prior_effective: dict[str, Any]
+) -> dict[str, Any]:
+    """Resolve per-step replay delay by sourcing signal values from earlier steps when requested."""
+    delay_steps = int(step.get("delay_steps", 0))
+    source_step = idx - delay_steps
+
+    if delay_steps > 0 and source_step >= 0:
+        source = steps[source_step]
+    elif delay_steps > 0 and source_step < 0:
+        source = prior_effective
+    else:
+        source = step
+
+    return {
+        "temp_c": float(source.get("temp_c", prior_effective.get("temp_c", 0.0))),
+        "vibration_g": float(source.get("vibration_g", prior_effective.get("vibration_g", 0.0))),
+        "sensor_valid": bool(source.get("sensor_valid", prior_effective.get("sensor_valid", True))),
+        "delay_steps": delay_steps,
+    }
+
+
 def _evaluate_step(
     idx: int,
     step: dict[str, Any],
     temp_high: float,
     vibration_high: float,
 ) -> dict[str, Any]:
-    temp_c = float(step.get("temp_c", 0.0))
-    vibration_g = float(step.get("vibration_g", 0.0))
-    sensor_valid = bool(step.get("sensor_valid", True))
+    temp_c = float(step["temp_c"])
+    vibration_g = float(step["vibration_g"])
+    sensor_valid = bool(step["sensor_valid"])
     observed = _compute_runtime_outputs(
         temp_c,
         vibration_g,
@@ -114,6 +145,51 @@ def _adapter_checks(exchange: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _evaluate_scenario(
+    steps: list[dict[str, Any]],
+    temp_high: float,
+    vibration_high: float,
+    base_step_ms: int,
+    default_jitter_ms: int,
+    seed: int,
+) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    prior_effective: dict[str, Any] = {"temp_c": 0.0, "vibration_g": 0.0, "sensor_valid": True}
+    rng = random.Random(seed)
+    timeline_ms = 0
+
+    for idx, step in enumerate(steps):
+        effective_input = _resolve_replayed_input(idx, step, steps, prior_effective)
+        evaluation = _evaluate_step(
+            idx,
+            effective_input,
+            temp_high=temp_high,
+            vibration_high=vibration_high,
+        )
+
+        delay_ms = int(step.get("delay_ms", 0))
+        jitter_ms = int(step.get("jitter_ms", default_jitter_ms))
+        effective_jitter = rng.randint(-jitter_ms, jitter_ms) if jitter_ms > 0 else 0
+        scheduled_ms = timeline_ms + base_step_ms + delay_ms
+        observed_ms = max(scheduled_ms + effective_jitter, timeline_ms)
+        timeline_ms = observed_ms
+
+        evaluation["timing"] = {
+            "base_step_ms": base_step_ms,
+            "delay_ms": delay_ms,
+            "jitter_ms": jitter_ms,
+            "applied_jitter_ms": effective_jitter,
+            "scheduled_ms": scheduled_ms,
+            "observed_ms": observed_ms,
+        }
+        evaluation["input"]["delay_steps"] = effective_input["delay_steps"]
+
+        prior_effective = effective_input
+        results.append(evaluation)
+
+    return results
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run Phase 3 replayable validation scenario.")
     parser.add_argument("--target-profile", required=True, help="Path to vdk_target_profile.json")
@@ -121,7 +197,13 @@ def main() -> int:
         "--exchange-contract", required=True, help="Path to embeddedx_vdk_exchange.json"
     )
     parser.add_argument("--scenario", required=True, help="Path to replay scenario JSON")
-    parser.add_argument("--report-out", default="build/vdk_validation_report.json")
+    parser.add_argument("--report-out", default="build/reports/vdk_validation_report.report.json")
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=7,
+        help="Deterministic seed for replay timing jitter (default: 7)",
+    )
     args = parser.parse_args()
 
     target_profile = _read_json(Path(args.target_profile).resolve())
@@ -129,15 +211,22 @@ def main() -> int:
     scenario = _read_json(Path(args.scenario).resolve())
 
     runtime = target_profile.get("runtime", {})
-    thresholds = runtime.get("alert_thresholds", {})
-    temp_high = float(thresholds.get("temp_c_high", 65.0))
-    vibration_high = float(thresholds.get("vibration_g_high", 1.2))
+    threshold_policy = _threshold_policy(runtime.get("alert_thresholds", {}))
+    temp_high = threshold_policy["temp_c_high"]
+    vibration_high = threshold_policy["vibration_g_high"]
+    timing = scenario.get("timing", {})
+    base_step_ms = int(timing.get("base_step_ms", 100))
+    default_jitter_ms = int(timing.get("jitter_ms", 0))
 
     steps = scenario.get("steps", [])
-    results = [
-        _evaluate_step(idx, step, temp_high=temp_high, vibration_high=vibration_high)
-        for idx, step in enumerate(steps)
-    ]
+    results = _evaluate_scenario(
+        steps=steps,
+        temp_high=temp_high,
+        vibration_high=vibration_high,
+        base_step_ms=base_step_ms,
+        default_jitter_ms=default_jitter_ms,
+        seed=args.seed,
+    )
     pass_count = sum(1 for item in results if item["pass"])
     fail_count = len(results) - pass_count
 
@@ -156,6 +245,11 @@ def main() -> int:
             "temp_c_high": temp_high,
             "vibration_g_high": vibration_high,
         },
+        "timing_policy": {
+            "base_step_ms": base_step_ms,
+            "default_jitter_ms": default_jitter_ms,
+            "seed": args.seed,
+        },
         "adapter_checks": adapter,
         "results": results,
         "summary": {
@@ -173,12 +267,13 @@ def main() -> int:
     report_out.parent.mkdir(parents=True, exist_ok=True)
     report_out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
-    print(f"Validation report written: {report_out}")
+    print(f"VALIDATION_REPORT path={report_out}")
     print(
-        "Summary: "
+        "VALIDATION_SUMMARY "
         f"overall_pass={overall_pass} "
         f"steps_passed={pass_count} steps_failed={fail_count} "
-        f"adapter_compatible={adapter['compatible']}"
+        f"adapter_compatible={adapter['compatible']} "
+        f"scenario={scenario.get('name', 'unnamed')}"
     )
     return 0 if overall_pass else 1
 

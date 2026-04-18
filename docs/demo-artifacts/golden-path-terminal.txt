@@ -1,26 +1,41 @@
-[Quickstart] Running EmbeddedX golden path demo...
-[1/3] Running phase 3 validation suite
+QUICKSTART_STEP index=1 name=golden_path status=running
+GOLDEN_PATH_STEP index=1 name=phase3_validation status=running
+SCENARIO_SYNC status=pass mode=check source=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/scenarios target=/Users/richardhaberkern/Python Projects/EmbeddedX/projects/example_sensor_monitor/validation
 Phase 2 artifacts generated:
 - target profile: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/vdk_target_profile.json
 - exchange contract: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/embeddedx_vdk_exchange.json
 - runtime stub: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/eil_runtime_stub.c
 - inject manifest: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/embeddedx_inject_manifest.json
-Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_baseline.report.json
-Summary: overall_pass=True steps_passed=5 steps_failed=0 adapter_compatible=True
-Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_noise_burst.report.json
-Summary: overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True
-Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_sensor_dropout.report.json
-Summary: overall_pass=True steps_passed=3 steps_failed=0 adapter_compatible=True
-Validation report written: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/scenario_threshold_edges.report.json
-Summary: overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True
-Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
-[2/3] Running short live VDK demo
+PHASE_SUMMARY phase=phase2 status=pass report_dir=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_baseline status=running
+VALIDATION_REPORT path=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_baseline.report.json
+VALIDATION_SUMMARY overall_pass=True steps_passed=6 steps_failed=0 adapter_compatible=True scenario=example_sensor_monitor_baseline
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_baseline status=pass report=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_baseline.report.json
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_noise_burst status=running
+VALIDATION_REPORT path=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_noise_burst.report.json
+VALIDATION_SUMMARY overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True scenario=example_sensor_monitor_noise_burst
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_noise_burst status=pass report=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_noise_burst.report.json
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_sensor_dropout status=running
+VALIDATION_REPORT path=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_sensor_dropout.report.json
+VALIDATION_SUMMARY overall_pass=True steps_passed=3 steps_failed=0 adapter_compatible=True scenario=example_sensor_monitor_sensor_dropout
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_sensor_dropout status=pass report=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_sensor_dropout.report.json
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_threshold_edges status=running
+VALIDATION_REPORT path=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_threshold_edges.report.json
+VALIDATION_SUMMARY overall_pass=True steps_passed=4 steps_failed=0 adapter_compatible=True scenario=example_sensor_monitor_threshold_edges
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_threshold_edges status=pass report=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_threshold_edges.report.json
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_timing_delay status=running
+VALIDATION_REPORT path=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_timing_delay.report.json
+VALIDATION_SUMMARY overall_pass=True steps_passed=5 steps_failed=0 adapter_compatible=True scenario=example_sensor_monitor_timing_delay
+PHASE_STEP phase=phase3 scenario=example_sensor_monitor_timing_delay status=pass report=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports/example_sensor_monitor_timing_delay.report.json
+PHASE_SUMMARY phase=phase3 status=pass reports=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+GOLDEN_PATH_STEP index=1 name=phase3_validation status=pass reports=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+GOLDEN_PATH_STEP index=2 name=vdk_live_demo status=running
 [2J[H+------------------------------------------------+
 |                                                |
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0000                                     |
-| temp_c: 41.81                                  |
+| temp_c: 41.85                                  |
 | vibration_g: 0.28                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
@@ -34,12 +49,12 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0001                                     |
-| temp_c: 42.55                                  |
-| vibration_g: 0.61                              |
+| temp_c: 42.29                                  |
+| vibration_g: 0.54                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
-| TEMP   #########...............                |
-| VIBE   #######.................                |
+| TEMP   ########................                |
+| VIBE   ######..................                |
 |                                                |
 |                                                |
 +------------------------------------------------+
@@ -48,8 +63,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0002                                     |
-| temp_c: 43.31                                  |
-| vibration_g: 0.82                              |
+| temp_c: 42.93                                  |
+| vibration_g: 0.80                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   #########...............                |
@@ -62,8 +77,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0003                                     |
-| temp_c: 43.65                                  |
-| vibration_g: 1.07                              |
+| temp_c: 44.49                                  |
+| vibration_g: 1.02                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   #########...............                |
@@ -76,63 +91,7 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0004                                     |
-| temp_c: 44.39                                  |
-| vibration_g: 1.23                              |
-| alert: ON                                      |
-| io: 2 in / 6 out                               |
-| TEMP   #########...............                |
-| VIBE   ##############..........                |
-|                                                |
-|                                                |
-+------------------------------------------------+
-[2J[H+------------------------------------------------+
-|                                                |
-| VDK MINIMAL SENSOR MONITOR                     |
-|                                                |
-| tick: 0005                                     |
-| temp_c: 45.20                                  |
-| vibration_g: 1.31                              |
-| alert: ON                                      |
-| io: 2 in / 6 out                               |
-| TEMP   ##########..............                |
-| VIBE   ###############.........                |
-|                                                |
-|                                                |
-+------------------------------------------------+
-[2J[H+------------------------------------------------+
-|                                                |
-| VDK MINIMAL SENSOR MONITOR                     |
-|                                                |
-| tick: 0006                                     |
-| temp_c: 46.09                                  |
-| vibration_g: 1.45                              |
-| alert: ON                                      |
-| io: 2 in / 6 out                               |
-| TEMP   ##########..............                |
-| VIBE   #################.......                |
-|                                                |
-|                                                |
-+------------------------------------------------+
-[2J[H+------------------------------------------------+
-|                                                |
-| VDK MINIMAL SENSOR MONITOR                     |
-|                                                |
-| tick: 0007                                     |
-| temp_c: 46.42                                  |
-| vibration_g: 1.41                              |
-| alert: ON                                      |
-| io: 2 in / 6 out                               |
-| TEMP   ##########..............                |
-| VIBE   ################........                |
-|                                                |
-|                                                |
-+------------------------------------------------+
-[2J[H+------------------------------------------------+
-|                                                |
-| VDK MINIMAL SENSOR MONITOR                     |
-|                                                |
-| tick: 0008                                     |
-| temp_c: 46.69                                  |
+| temp_c: 45.26                                  |
 | vibration_g: 1.27                              |
 | alert: ON                                      |
 | io: 2 in / 6 out                               |
@@ -145,13 +104,69 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 |                                                |
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
-| tick: 0009                                     |
-| temp_c: 47.17                                  |
-| vibration_g: 1.19                              |
-| alert: off                                     |
+| tick: 0005                                     |
+| temp_c: 45.94                                  |
+| vibration_g: 1.38                              |
+| alert: ON                                      |
 | io: 2 in / 6 out                               |
 | TEMP   ##########..............                |
-| VIBE   ##############..........                |
+| VIBE   ################........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0006                                     |
+| temp_c: 46.48                                  |
+| vibration_g: 1.40                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ################........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0007                                     |
+| temp_c: 46.88                                  |
+| vibration_g: 1.42                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   #################.......                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0008                                     |
+| temp_c: 46.75                                  |
+| vibration_g: 1.32                              |
+| alert: ON                                      |
+| io: 2 in / 6 out                               |
+| TEMP   ##########..............                |
+| VIBE   ###############.........                |
+|                                                |
+|                                                |
++------------------------------------------------+
+[2J[H+------------------------------------------------+
+|                                                |
+| VDK MINIMAL SENSOR MONITOR                     |
+|                                                |
+| tick: 0009                                     |
+| temp_c: 47.89                                  |
+| vibration_g: 1.14                              |
+| alert: off                                     |
+| io: 2 in / 6 out                               |
+| TEMP   ###########.............                |
+| VIBE   #############...........                |
 |                                                |
 |                                                |
 +------------------------------------------------+
@@ -160,8 +175,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0010                                     |
-| temp_c: 47.98                                  |
-| vibration_g: 0.97                              |
+| temp_c: 47.64                                  |
+| vibration_g: 0.94                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   ###########.............                |
@@ -174,8 +189,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0011                                     |
-| temp_c: 48.19                                  |
-| vibration_g: 0.75                              |
+| temp_c: 48.30                                  |
+| vibration_g: 0.77                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   ###########.............                |
@@ -188,11 +203,11 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0012                                     |
-| temp_c: 47.49                                  |
-| vibration_g: 0.42                              |
+| temp_c: 47.81                                  |
+| vibration_g: 0.48                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
-| TEMP   ##########..............                |
+| TEMP   ###########.............                |
 | VIBE   #####...................                |
 |                                                |
 |                                                |
@@ -202,12 +217,12 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0013                                     |
-| temp_c: 48.59                                  |
-| vibration_g: 0.45                              |
+| temp_c: 47.76                                  |
+| vibration_g: 0.39                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   ###########.............                |
-| VIBE   #####...................                |
+| VIBE   ####....................                |
 |                                                |
 |                                                |
 +------------------------------------------------+
@@ -216,12 +231,12 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0014                                     |
-| temp_c: 48.37                                  |
-| vibration_g: 0.64                              |
+| temp_c: 47.82                                  |
+| vibration_g: 0.67                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
 | TEMP   ###########.............                |
-| VIBE   #######.................                |
+| VIBE   ########................                |
 |                                                |
 |                                                |
 +------------------------------------------------+
@@ -230,11 +245,11 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0015                                     |
-| temp_c: 48.17                                  |
-| vibration_g: 0.89                              |
+| temp_c: 47.22                                  |
+| vibration_g: 0.91                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
-| TEMP   ###########.............                |
+| TEMP   ##########..............                |
 | VIBE   ##########..............                |
 |                                                |
 |                                                |
@@ -244,11 +259,11 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0016                                     |
-| temp_c: 47.01                                  |
+| temp_c: 47.56                                  |
 | vibration_g: 1.17                              |
 | alert: off                                     |
 | io: 2 in / 6 out                               |
-| TEMP   ##########..............                |
+| TEMP   ###########.............                |
 | VIBE   ##############..........                |
 |                                                |
 |                                                |
@@ -258,11 +273,11 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0017                                     |
-| temp_c: 47.67                                  |
-| vibration_g: 1.28                              |
+| temp_c: 47.38                                  |
+| vibration_g: 1.33                              |
 | alert: ON                                      |
 | io: 2 in / 6 out                               |
-| TEMP   ###########.............                |
+| TEMP   ##########..............                |
 | VIBE   ###############.........                |
 |                                                |
 |                                                |
@@ -272,8 +287,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0018                                     |
-| temp_c: 46.47                                  |
-| vibration_g: 1.39                              |
+| temp_c: 46.59                                  |
+| vibration_g: 1.40                              |
 | alert: ON                                      |
 | io: 2 in / 6 out                               |
 | TEMP   ##########..............                |
@@ -286,8 +301,8 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 | VDK MINIMAL SENSOR MONITOR                     |
 |                                                |
 | tick: 0019                                     |
-| temp_c: 46.35                                  |
-| vibration_g: 1.39                              |
+| temp_c: 45.60                                  |
+| vibration_g: 1.36                              |
 | alert: ON                                      |
 | io: 2 in / 6 out                               |
 | TEMP   ##########..............                |
@@ -295,12 +310,9 @@ Phase 3 validation complete: /Users/richardhaberkern/Python Projects/Virtual-Dev
 |                                                |
 |                                                |
 +------------------------------------------------+
-[3/3] Golden path complete
-Validation reports: /Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
-
-[Quickstart] Success.
-Reports:
-  /Users/richardhaberkern/Python Projects/EmbeddedX/../Virtual-Development-Kit/build/reports
-Next:
-  1) Open /Users/richardhaberkern/Python Projects/EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md
-  2) Review /Users/richardhaberkern/Python Projects/EmbeddedX/RELEASE_CHECKPOINT_v0.1-alpha.md
+GOLDEN_PATH_STEP index=2 name=vdk_live_demo status=pass
+GOLDEN_PATH_SUMMARY status=pass reports=/Users/richardhaberkern/Python Projects/Virtual-Development-Kit/build/reports
+QUICKSTART_STEP index=1 name=golden_path status=pass
+QUICKSTART_SUMMARY status=pass reports=/Users/richardhaberkern/Python Projects/EmbeddedX/../Virtual-Development-Kit/build/reports
+QUICKSTART_NEXT doc=/Users/richardhaberkern/Python Projects/EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md
+QUICKSTART_NEXT doc=/Users/richardhaberkern/Python Projects/EmbeddedX/RELEASE_CHECKPOINT_v0.1-alpha.md

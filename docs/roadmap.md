@@ -45,6 +45,18 @@ Current implementation:
 - `scripts/run_phase4_validation_suite.sh` executes fixture-driven integration + scenario replay
 - scenario set now includes baseline, noise burst, sensor dropout, and threshold edges
 
+## Phase 6 - Reliability Hardening
+- improve replay realism with timing and delayed-signal behavior
+- enforce scenario source-of-truth consistency across repos
+- standardize script summaries for CI parsing
+- document retention and cleanup policy for demo/validation artifacts
+
+Current implementation:
+- validator supports deterministic jitter (`--seed`) and delayed replay (`delay_steps`, `delay_ms`)
+- VDK CI now checks EmbeddedX scenario mirror consistency
+- script outputs include `PHASE_SUMMARY` / `VALIDATION_SUMMARY` records
+- retention policy and cleanup helper are documented in `docs/ARTIFACT_RETENTION_POLICY.md`
+
 ## Not Required for Phase 1
 - full ARM accuracy
 - perfect timing fidelity

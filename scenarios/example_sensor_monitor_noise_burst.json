@@ -1,6 +1,10 @@
 {
   "name": "example_sensor_monitor_noise_burst",
   "description": "Noise burst scenario to verify transitions from nominal to alert and back.",
+  "timing": {
+    "base_step_ms": 90,
+    "jitter_ms": 12
+  },
   "steps": [
     {
       "temp_c": 43.2,

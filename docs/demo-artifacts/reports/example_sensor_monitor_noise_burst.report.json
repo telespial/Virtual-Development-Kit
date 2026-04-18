@@ -1,14 +1,19 @@
 {
   "schema": "embeddedx.vdk.validation.v0",
-  "generated_at_utc": "2026-04-18T16:55:03.130054+00:00",
+  "generated_at_utc": "2026-04-18T17:31:45.679435+00:00",
   "scenario": {
     "name": "example_sensor_monitor_noise_burst",
-    "description": "Noise burst scenario for phase 4 validation.",
+    "description": "Noise burst scenario to verify transitions from nominal to alert and back.",
     "step_count": 4
   },
   "runtime_thresholds": {
     "temp_c_high": 65.0,
     "vibration_g_high": 1.2
+  },
+  "timing_policy": {
+    "base_step_ms": 90,
+    "default_jitter_ms": 12,
+    "seed": 7
   },
   "adapter_checks": {
     "input_count": 2,
@@ -28,80 +33,100 @@
       "input": {
         "temp_c": 43.2,
         "vibration_g": 0.42,
-        "sensor_valid": true
+        "sensor_valid": true,
+        "delay_steps": 0
       },
-      "expected": {
-        "alert_state": 0,
-        "reason_code": "none",
-        "anomaly_score_min": 0.0
-      },
+      "expected": {},
       "observed": {
         "alert_state": 0,
         "anomaly_score": 0.0,
         "reason_code": "none"
       },
       "pass": true,
-      "mismatches": []
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 90,
+        "delay_ms": 0,
+        "jitter_ms": 12,
+        "applied_jitter_ms": -2,
+        "scheduled_ms": 90,
+        "observed_ms": 88
+      }
     },
     {
       "index": 1,
       "input": {
         "temp_c": 44.6,
         "vibration_g": 1.28,
-        "sensor_valid": true
+        "sensor_valid": true,
+        "delay_steps": 0
       },
-      "expected": {
-        "alert_state": 1,
-        "reason_code": "vibration_high",
-        "anomaly_score_min": 0.01
-      },
+      "expected": {},
       "observed": {
         "alert_state": 1,
         "anomaly_score": 0.066667,
         "reason_code": "vibration_high"
       },
       "pass": true,
-      "mismatches": []
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 90,
+        "delay_ms": 0,
+        "jitter_ms": 12,
+        "applied_jitter_ms": -8,
+        "scheduled_ms": 178,
+        "observed_ms": 170
+      }
     },
     {
       "index": 2,
       "input": {
         "temp_c": 45.0,
         "vibration_g": 1.41,
-        "sensor_valid": true
+        "sensor_valid": true,
+        "delay_steps": 0
       },
-      "expected": {
-        "alert_state": 1,
-        "reason_code": "vibration_high",
-        "anomaly_score_min": 0.01
-      },
+      "expected": {},
       "observed": {
         "alert_state": 1,
         "anomaly_score": 0.175,
         "reason_code": "vibration_high"
       },
       "pass": true,
-      "mismatches": []
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 90,
+        "delay_ms": 0,
+        "jitter_ms": 12,
+        "applied_jitter_ms": 0,
+        "scheduled_ms": 260,
+        "observed_ms": 260
+      }
     },
     {
       "index": 3,
       "input": {
         "temp_c": 44.2,
         "vibration_g": 0.62,
-        "sensor_valid": true
+        "sensor_valid": true,
+        "delay_steps": 0
       },
-      "expected": {
-        "alert_state": 0,
-        "reason_code": "none",
-        "anomaly_score_min": 0.0
-      },
+      "expected": {},
       "observed": {
         "alert_state": 0,
         "anomaly_score": 0.0,
         "reason_code": "none"
       },
       "pass": true,
-      "mismatches": []
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 90,
+        "delay_ms": 0,
+        "jitter_ms": 12,
+        "applied_jitter_ms": 8,
+        "scheduled_ms": 350,
+        "observed_ms": 358
+      }
     }
   ],
   "summary": {

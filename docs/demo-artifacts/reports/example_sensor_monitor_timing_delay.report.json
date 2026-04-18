@@ -1,0 +1,163 @@
+{
+  "schema": "embeddedx.vdk.validation.v0",
+  "generated_at_utc": "2026-04-18T17:31:46.054896+00:00",
+  "scenario": {
+    "name": "example_sensor_monitor_timing_delay",
+    "description": "Timing-focused scenario with jitter and delayed-signal replay semantics.",
+    "step_count": 5
+  },
+  "runtime_thresholds": {
+    "temp_c_high": 65.0,
+    "vibration_g_high": 1.2
+  },
+  "timing_policy": {
+    "base_step_ms": 80,
+    "default_jitter_ms": 20,
+    "seed": 7
+  },
+  "adapter_checks": {
+    "input_count": 2,
+    "output_count": 6,
+    "required_outputs": [
+      "alert_state",
+      "anomaly_score",
+      "reason_code"
+    ],
+    "missing_outputs": [],
+    "has_runtime_mode": true,
+    "compatible": true
+  },
+  "results": [
+    {
+      "index": 0,
+      "input": {
+        "temp_c": 44.0,
+        "vibration_g": 0.6,
+        "sensor_valid": true,
+        "delay_steps": 0
+      },
+      "expected": {},
+      "observed": {
+        "alert_state": 0,
+        "anomaly_score": 0.0,
+        "reason_code": "none"
+      },
+      "pass": true,
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 80,
+        "delay_ms": 0,
+        "jitter_ms": 20,
+        "applied_jitter_ms": 0,
+        "scheduled_ms": 80,
+        "observed_ms": 80
+      }
+    },
+    {
+      "index": 1,
+      "input": {
+        "temp_c": 44.0,
+        "vibration_g": 0.6,
+        "sensor_valid": true,
+        "delay_steps": 1
+      },
+      "expected": {},
+      "observed": {
+        "alert_state": 0,
+        "anomaly_score": 0.0,
+        "reason_code": "none"
+      },
+      "pass": true,
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 80,
+        "delay_ms": 40,
+        "jitter_ms": 20,
+        "applied_jitter_ms": -11,
+        "scheduled_ms": 200,
+        "observed_ms": 189
+      }
+    },
+    {
+      "index": 2,
+      "input": {
+        "temp_c": 66.0,
+        "vibration_g": 0.95,
+        "sensor_valid": true,
+        "delay_steps": 0
+      },
+      "expected": {},
+      "observed": {
+        "alert_state": 1,
+        "anomaly_score": 0.015385,
+        "reason_code": "temperature_high"
+      },
+      "pass": true,
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 80,
+        "delay_ms": 0,
+        "jitter_ms": 20,
+        "applied_jitter_ms": 5,
+        "scheduled_ms": 269,
+        "observed_ms": 274
+      }
+    },
+    {
+      "index": 3,
+      "input": {
+        "temp_c": 66.0,
+        "vibration_g": 0.95,
+        "sensor_valid": true,
+        "delay_steps": 1
+      },
+      "expected": {},
+      "observed": {
+        "alert_state": 1,
+        "anomaly_score": 0.015385,
+        "reason_code": "temperature_high"
+      },
+      "pass": true,
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 80,
+        "delay_ms": 0,
+        "jitter_ms": 20,
+        "applied_jitter_ms": -17,
+        "scheduled_ms": 354,
+        "observed_ms": 337
+      }
+    },
+    {
+      "index": 4,
+      "input": {
+        "temp_c": 45.0,
+        "vibration_g": 0.7,
+        "sensor_valid": true,
+        "delay_steps": 0
+      },
+      "expected": {},
+      "observed": {
+        "alert_state": 0,
+        "anomaly_score": 0.0,
+        "reason_code": "none"
+      },
+      "pass": true,
+      "mismatches": [],
+      "timing": {
+        "base_step_ms": 80,
+        "delay_ms": 0,
+        "jitter_ms": 20,
+        "applied_jitter_ms": -16,
+        "scheduled_ms": 417,
+        "observed_ms": 401
+      }
+    }
+  ],
+  "summary": {
+    "overall_pass": true,
+    "step_pass_count": 5,
+    "step_fail_count": 0
+  },
+  "before_hardware_story": "This report confirms signal contract compatibility and expected EIL advisory behavior on replayed sensor traces before flashing physical hardware."
+}

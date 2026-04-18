@@ -25,6 +25,11 @@ jobs:
         run: |
           ./scripts/run_phase4_validation_suite.sh
 
+      - name: Check scenario mirror in EmbeddedX
+        run: |
+          git clone https://github.com/telespial/EmbeddedX.git ../EmbeddedX
+          ../EmbeddedX/tools/sync_vdk_scenarios.sh --check
+
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:

@@ -1,6 +1,10 @@
 {
   "name": "example_sensor_monitor_sensor_dropout",
   "description": "Sensor dropout scenario verifies degraded operation contract.",
+  "timing": {
+    "base_step_ms": 110,
+    "jitter_ms": 5
+  },
   "steps": [
     {
       "temp_c": 44.0,

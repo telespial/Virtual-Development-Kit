@@ -6,6 +6,7 @@ Phase 3 adds replayable validation so EmbeddedX teams can verify runtime behavio
 
 - Execution-adapter compatibility checks against the EmbeddedX exchange contract
 - Replayable sensor scenarios with deterministic expected outcomes
+- Timing-aware replay using `delay_steps`, `delay_ms`, and deterministic jitter
 - Machine-readable pass/fail report for pre-hardware signoff
 
 ## Validation Flow
@@ -23,7 +24,8 @@ python3 src/vdk_phase3_validate.py \
   --target-profile build/vdk_target_profile.json \
   --exchange-contract build/embeddedx_vdk_exchange.json \
   --scenario scenarios/example_sensor_monitor_baseline.json \
-  --report-out build/reports/example_sensor_monitor_baseline.report.json
+  --report-out build/reports/example_sensor_monitor_baseline.report.json \
+  --seed 7
 ```
 
 ## Phase 4 Suite
@@ -39,6 +41,7 @@ Default scenarios:
 - `example_sensor_monitor_noise_burst.json`
 - `example_sensor_monitor_sensor_dropout.json`
 - `example_sensor_monitor_threshold_edges.json`
+- `example_sensor_monitor_timing_delay.json`
 
 ## Before-Hardware Story
 

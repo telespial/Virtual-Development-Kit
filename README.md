@@ -114,6 +114,7 @@ This executes:
 For the end-to-end onboarding flow from EmbeddedX, see:
 - [`../EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md`](../EmbeddedX/docs/FIRST_SUCCESSFUL_RUN.md)
 - [`docs/demo-artifacts/README.md`](./docs/demo-artifacts/README.md)
+- [`docs/ARTIFACT_RETENTION_POLICY.md`](./docs/ARTIFACT_RETENTION_POLICY.md)
 
 ## Recommended Repo Layout
 
@@ -136,10 +137,13 @@ Virtual-Development-Kit/
     example_sensor_monitor_noise_burst.json
     example_sensor_monitor_sensor_dropout.json
     example_sensor_monitor_threshold_edges.json
+    example_sensor_monitor_timing_delay.json
   scripts/
     run_phase4_validation_suite.sh
   fixtures/
     example_sensor_monitor/
+  tools/
+    cleanup_artifacts.sh
   crates/
     vdk-core/
     vdk-devices/
