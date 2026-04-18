@@ -12,9 +12,9 @@ Phase 3 adds replayable validation so EmbeddedX teams can verify runtime behavio
 
 1. Generate target + exchange artifacts (`vdk_phase2_integration.py`)
 2. Run scenario replay validator (`vdk_phase3_validate.py`)
-3. Inspect `vdk_validation_report.json`
+3. Inspect `build/reports/*.report.json`
 
-## Example Command
+## Example Command (Single Scenario)
 
 ```bash
 cd /home/user/python_projects/Virtual-Development-Kit
@@ -23,8 +23,22 @@ python3 src/vdk_phase3_validate.py \
   --target-profile build/vdk_target_profile.json \
   --exchange-contract build/embeddedx_vdk_exchange.json \
   --scenario scenarios/example_sensor_monitor_baseline.json \
-  --report-out build/vdk_validation_report.json
+  --report-out build/reports/example_sensor_monitor_baseline.report.json
 ```
+
+## Phase 4 Suite
+
+Run all validation scenarios:
+
+```bash
+./scripts/run_phase4_validation_suite.sh
+```
+
+Default scenarios:
+- `example_sensor_monitor_baseline.json`
+- `example_sensor_monitor_noise_burst.json`
+- `example_sensor_monitor_sensor_dropout.json`
+- `example_sensor_monitor_threshold_edges.json`
 
 ## Before-Hardware Story
 

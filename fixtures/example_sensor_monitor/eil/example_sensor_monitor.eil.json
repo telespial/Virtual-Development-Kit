@@ -1,0 +1,9 @@
+{
+  "runtime_mode": "advisory",
+  "reason_codes": [
+    "temperature_high",
+    "vibration_spike",
+    "sensor_dropout"
+  ],
+  "integration_api": "eil_infer()"
+}

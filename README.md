@@ -91,13 +91,25 @@ python3 src/vdk_phase3_validate.py \
   --target-profile build/vdk_target_profile.json \
   --exchange-contract build/embeddedx_vdk_exchange.json \
   --scenario scenarios/example_sensor_monitor_baseline.json \
-  --report-out build/vdk_validation_report.json
+  --report-out build/reports/example_sensor_monitor_baseline.report.json
 ```
 
 This produces a machine-readable pass/fail report with:
 - execution-adapter compatibility checks
 - expected vs observed EIL advisory outputs
 - a pre-hardware validation summary
+
+## Phase 4 CI + Scenario Suite
+Run the complete suite locally:
+
+```bash
+./scripts/run_phase4_validation_suite.sh
+```
+
+This executes:
+- Phase 2 artifact generation from local fixture inputs
+- all replay scenarios in `scenarios/`
+- short live demo smoke run
 
 ## Recommended Repo Layout
 
@@ -117,6 +129,13 @@ Virtual-Development-Kit/
     vdk_phase3_validate.py
   scenarios/
     example_sensor_monitor_baseline.json
+    example_sensor_monitor_noise_burst.json
+    example_sensor_monitor_sensor_dropout.json
+    example_sensor_monitor_threshold_edges.json
+  scripts/
+    run_phase4_validation_suite.sh
+  fixtures/
+    example_sensor_monitor/
   crates/
     vdk-core/
     vdk-devices/

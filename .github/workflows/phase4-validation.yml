@@ -1,0 +1,32 @@
+name: Phase4 Validation
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile check
+        run: |
+          python3 -m py_compile src/vdk_phase2_integration.py src/vdk_phase3_validate.py src/vdk_minimal_demo.py
+
+      - name: Run Phase 4 validation suite
+        run: |
+          ./scripts/run_phase4_validation_suite.sh
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: vdk-validation-reports
+          path: build/reports/*.json

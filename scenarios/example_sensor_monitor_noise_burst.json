@@ -1,0 +1,42 @@
+{
+  "name": "example_sensor_monitor_noise_burst",
+  "description": "Noise burst scenario to verify transitions from nominal to alert and back.",
+  "steps": [
+    {
+      "temp_c": 43.2,
+      "vibration_g": 0.42,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    },
+    {
+      "temp_c": 44.6,
+      "vibration_g": 1.28,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "vibration_high",
+        "anomaly_score_min": 0.01
+      }
+    },
+    {
+      "temp_c": 45.0,
+      "vibration_g": 1.41,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "vibration_high",
+        "anomaly_score_min": 0.01
+      }
+    },
+    {
+      "temp_c": 44.2,
+      "vibration_g": 0.62,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    }
+  ]
+}

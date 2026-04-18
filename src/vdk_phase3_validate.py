@@ -15,18 +15,31 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _compute_runtime_outputs(
-    temp_c: float, vibration_g: float, temp_high: float, vibration_high: float
+    temp_c: float,
+    vibration_g: float,
+    temp_high: float,
+    vibration_high: float,
+    sensor_valid: bool = True,
 ) -> dict[str, Any]:
+    if not sensor_valid:
+        return {
+            "alert_state": 1,
+            "anomaly_score": 1.0,
+            "reason_code": "sensor_dropout",
+        }
+
     temp_ratio = max((temp_c - temp_high) / max(temp_high, 1.0), 0.0)
     vibe_ratio = max((vibration_g - vibration_high) / max(vibration_high, 1.0), 0.0)
     anomaly_score = max(temp_ratio, vibe_ratio)
-    alert_state = 1 if anomaly_score > 0.0 else 0
+    is_temp_high = temp_c >= temp_high
+    is_vibration_high = vibration_g >= vibration_high
+    alert_state = 1 if (is_temp_high or is_vibration_high) else 0
 
-    if temp_c >= temp_high and vibration_g >= vibration_high:
+    if is_temp_high and is_vibration_high:
         reason_code = "temperature_and_vibration_high"
-    elif temp_c >= temp_high:
+    elif is_temp_high:
         reason_code = "temperature_high"
-    elif vibration_g >= vibration_high:
+    elif is_vibration_high:
         reason_code = "vibration_high"
     else:
         reason_code = "none"
@@ -46,7 +59,14 @@ def _evaluate_step(
 ) -> dict[str, Any]:
     temp_c = float(step.get("temp_c", 0.0))
     vibration_g = float(step.get("vibration_g", 0.0))
-    observed = _compute_runtime_outputs(temp_c, vibration_g, temp_high, vibration_high)
+    sensor_valid = bool(step.get("sensor_valid", True))
+    observed = _compute_runtime_outputs(
+        temp_c,
+        vibration_g,
+        temp_high,
+        vibration_high,
+        sensor_valid=sensor_valid,
+    )
     expected = step.get("expected", {})
 
     mismatches: list[str] = []
@@ -68,7 +88,7 @@ def _evaluate_step(
 
     return {
         "index": idx,
-        "input": {"temp_c": temp_c, "vibration_g": vibration_g},
+        "input": {"temp_c": temp_c, "vibration_g": vibration_g, "sensor_valid": sensor_valid},
         "expected": expected,
         "observed": observed,
         "pass": len(mismatches) == 0,

@@ -1,0 +1,36 @@
+{
+  "name": "example_sensor_monitor_sensor_dropout",
+  "description": "Sensor dropout scenario verifies degraded operation contract.",
+  "steps": [
+    {
+      "temp_c": 44.0,
+      "vibration_g": 0.60,
+      "sensor_valid": true,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    },
+    {
+      "temp_c": 0.0,
+      "vibration_g": 0.0,
+      "sensor_valid": false,
+      "expected": {
+        "alert_state": 1,
+        "reason_code": "sensor_dropout",
+        "anomaly_score_min": 1.0
+      }
+    },
+    {
+      "temp_c": 45.3,
+      "vibration_g": 0.72,
+      "sensor_valid": true,
+      "expected": {
+        "alert_state": 0,
+        "reason_code": "none",
+        "anomaly_score_min": 0.0
+      }
+    }
+  ]
+}

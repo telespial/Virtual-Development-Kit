@@ -1,0 +1,23 @@
+project: example_sensor_monitor
+version: 0.1
+
+inputs:
+  - name: sensor_temp_c
+    type: float
+    unit: celsius
+  - name: sensor_vibration_g
+    type: float
+    unit: g
+
+outputs:
+  - name: status_led
+    type: gpio
+  - name: telemetry_log
+    type: uart
+
+runtime:
+  mode: monitor
+  sample_hz: 10
+  alert_thresholds:
+    temp_c_high: 65.0
+    vibration_g_high: 1.2

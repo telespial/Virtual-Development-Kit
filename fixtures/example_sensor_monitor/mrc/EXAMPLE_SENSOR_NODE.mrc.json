@@ -1,0 +1,61 @@
+{
+  "board": {
+    "name": "example_sensor_monitor_board",
+    "revision": "A"
+  },
+  "components": [
+    {
+      "refdes": "U1",
+      "class": "mcu",
+      "part_number": "EXAMPLE_SENSOR_NODE"
+    },
+    {
+      "refdes": "U2",
+      "class": "sensor",
+      "part_number": "FAKE_TEMP_VIBE_SENSOR"
+    }
+  ],
+  "nets": [
+    {
+      "name": "ADC_TEMP",
+      "members": [
+        {
+          "refdes": "U1",
+          "pin": "ADC0_CH0"
+        },
+        {
+          "refdes": "U2",
+          "pin": "TEMP_OUT"
+        }
+      ],
+      "signal_role": "adc_input",
+      "power_domain": "3V3"
+    },
+    {
+      "name": "ADC_VIBE",
+      "members": [
+        {
+          "refdes": "U1",
+          "pin": "ADC0_CH1"
+        },
+        {
+          "refdes": "U2",
+          "pin": "VIBE_OUT"
+        }
+      ],
+      "signal_role": "adc_input",
+      "power_domain": "3V3"
+    },
+    {
+      "name": "UART_TELEMETRY",
+      "members": [
+        {
+          "refdes": "U1",
+          "pin": "UART0_TX"
+        }
+      ],
+      "signal_role": "uart_tx",
+      "power_domain": "3V3"
+    }
+  ]
+}

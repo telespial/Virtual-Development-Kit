@@ -1,0 +1,29 @@
+{
+  "model": "example_sensor_monitor_model",
+  "inputs": [
+    {
+      "name": "sensor_temp_c",
+      "unit": "celsius",
+      "sampleRateHz": 10
+    },
+    {
+      "name": "sensor_vibration_g",
+      "unit": "g",
+      "sampleRateHz": 10
+    }
+  ],
+  "outputs": [
+    {
+      "name": "alert_level",
+      "type": "enum"
+    },
+    {
+      "name": "anomaly_score",
+      "type": "float"
+    }
+  ],
+  "degraded_operation": {
+    "supported": true,
+    "behavior": "emit confidence-limited scores"
+  }
+}

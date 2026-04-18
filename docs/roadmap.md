@@ -35,6 +35,16 @@ Current implementation:
 - `scenarios/example_sensor_monitor_baseline.json` provides deterministic replay input
 - `docs/firmware-validation.md` documents before-hardware signoff flow
 
+## Phase 4 - Release Readiness
+- enforce validation in CI
+- expand replay coverage
+- define a repeatable alpha release gate
+
+Current implementation:
+- `.github/workflows/phase4-validation.yml` runs compile + suite checks on push and PR
+- `scripts/run_phase4_validation_suite.sh` executes fixture-driven integration + scenario replay
+- scenario set now includes baseline, noise burst, sensor dropout, and threshold edges
+
 ## Not Required for Phase 1
 - full ARM accuracy
 - perfect timing fidelity
